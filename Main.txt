@@ -161,15 +161,15 @@ If bp2 = True Then
   End Select
 End If 
   
-  If mtp_change = admin_mtp And bp = True And name <> Empty Then
-    Set fsoread = CreateObject("Scripting.FileSystemObject")
-     Set fr = fsoread.OpenTextFile("d:\secu\testfile.txt", ForReading)
-       Do Until fr.AtEndOfStream
+If mtp_change = admin_mtp And bp = True And name <> Empty Then
+   Set fsoread = CreateObject("Scripting.FileSystemObject")
+   Set fr = fsoread.OpenTextFile("d:\secu\testfile.txt", ForReading)
+   
+      Do Until fr.AtEndOfStream
        readbegin = fr.ReadLine 
        num4 = readbegin 
        Set fsowrit = CreateObject("Scripting.FileSystemO bject")
-       Set fw = fsowrit.OpenTextFile("d:\secu\testfiles. txt", 
-      ForAppending)
+       Set fw = fsowrit.OpenTextFile("d:\secu\testfiles. txt",ForAppending)
 
        If num4 <> name Then 
          fw.WriteLine readbegin 
@@ -186,7 +186,8 @@ End If
          SendEMail"chapoul@ipno.in2p3.fr", "Nouveau mot d e passe 
         utilisateur rentré - login", admin_sup2 , "chapoul@ipno.in2p3.fr"
        End If 
-    Loop
+       
+     Loop
 
    Set fsowrit = CreateObject("Scripting.FileSystemObject")
    Set fw = fsowrit.OpenTextFile("d:\secu\testfile.txt", ForWriting)
@@ -195,28 +196,26 @@ End If
    Set fsoread = CreateObject("Scripting.FileSystemObject")
    Set fr = fsoread.OpenTextFile("d:\secu\testfiles.txt", ForReading)
 
-     Do Until fr.AtEndOfStream
+   Do Until fr.AtEndOfStream
      readbegin = fr.ReadLine 
      num4 = readbegin 
      Set fsowrit = CreateObject("Scripting.FileSystem Object")
-     Set fw = fsowrit.OpenTextFile("d:\secu\testfile.t xt", 
-    ForAppending)
+     Set fw = fsowrit.OpenTextFile("d:\secu\testfile.t xt", ForAppending)
      fw.WriteLine readbegin 
      fw.Close 
   Loop
 
-    Set fsoraz = CreateObject("Scripting.FileSystemObject")
-     Set fraz = fsoraz.OpenTextFile("d:\secu\testfiles .txt", 
-    ForWriting)
-     fraz.WriteLine "" 
-     fraz.Close 
-    bp = False
-      SmartTags("bp") = False
+  Set fsoraz = CreateObject("Scripting.FileSystemObject")
+  Set fraz = fsoraz.OpenTextFile("d:\secu\testfiles .txt", ForWriting)
+  fraz.WriteLine "" 
+  fraz.Close 
+  bp = False
+  SmartTags("bp") = False
 
-    Set WSHSmessage_code = CreateObject("Wscript.Shell")
-    Msgcode = WSHSmessage_code.Popup("Nouveau mot de passe validé." & vbCrLf
-    & "En attente validation du service C&C.",5, "Information", 64)
-  End If
+  Set WSHSmessage_code = CreateObject("Wscript.Shell")
+  Msgcode = WSHSmessage_code.Popup("Nouveau mot de passe validé." & vbCrLf
+  & "En attente validation du service C&C.",5, "Information", 64)
+End If
   
 If name = Empty And bp = True Then
     Set WSHSmessage_codeerror = CreateObject("Wscript.Shell")
